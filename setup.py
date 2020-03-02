@@ -16,6 +16,6 @@ setup(
     description='Fork of kivy-garden progress spinner',
     long_description=README,
     install_requires=[
-        kivy==1.11.1,
+        'kivy==1.11.1',
     ]
 )
