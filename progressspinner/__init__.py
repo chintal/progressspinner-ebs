@@ -71,7 +71,7 @@ Builder.load_string('''
 		Rotate:
 			angle: -self._angle_center
 			origin: self.center
-		
+
 		StencilPush
 		Color:
 			rgba: 1, 1, 1, 1
@@ -100,7 +100,7 @@ Builder.load_string('''
 			width: self._stroke
 			cap: 'none'
 		StencilPop
-		
+
 		PopMatrix
 
 ''')
@@ -302,56 +302,56 @@ if __name__ == '__main__':
 
 				<TRotatingTextureProgressSpinner@RotatingTextureProgressSpinner>:
 					texture: app.texture
-				
+
 				<ITextureProgressSpinner@TextureProgressSpinner>:
 					source: 'demoimage.jpg'
-				
+
 				<IRotatingTextureProgressSpinner@RotatingTextureProgressSpinner>:
 					source: 'demoimage.jpg'
 
 				BoxLayout:
 					BoxLayout:
 						orientation: 'vertical'
-						
+
 						ProgressSpinner
-						
+
 						TTextureProgressSpinner
-						
+
 						TRotatingTextureProgressSpinner
-					
+
 					BoxLayout:
 						orientation: 'vertical'
-						
+
 						BoxLayout:
 							ProgressSpinner:
 								color: 0.3, 0.3, 1, 1
 								stroke_width: 1
-							
+
 							ProgressSpinner:
 								speed: 0.5
 								color: 1, 0, 0, 1
-							
+
 							ProgressSpinner:
 								speed: 2
 								color: 0, 1, 0, 1
-						
+
 						BoxLayout:
 							TTextureProgressSpinner:
 								color: 1, 0, 0, 1
-							
+
 							ITextureProgressSpinner:
 								stroke_width: 10
-							
+
 							ITextureProgressSpinner:
 								stroke_length: 20
-								
+
 						BoxLayout:
 							TRotatingTextureProgressSpinner:
 								color: 1, 0, 0, 1
-							
+
 							IRotatingTextureProgressSpinner:
 								stroke_width: 10
-							
+
 							IRotatingTextureProgressSpinner:
 								stroke_length: 20
 			'''))
