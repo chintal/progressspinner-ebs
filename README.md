@@ -15,11 +15,11 @@ This package builds on a lot of good work of other people, including :
 
 This is forked from `stimpe/garden.progressspinner` for the sole purpose of 
 making it pip installable from PyPI. and will be made available as the 
-`progressspinner-ebs` package on PyPI. 
+`kivy_garden.ebs.progressspinner` package on PyPI. 
 
-Though the package will be installed as `progressspinner-ebs`, the actual 
-importable package will still be `progressspinner`. Due to this, this fork 
-and upstream cannot coexist in the same python environment. 
+This package has no dependencies in the ebs namespace - it is simply used as 
+a convenient way to differentiate from the upstream package and restrict 
+namespace pollution to within the existing ebs namespace.
 
 If you are considering using this: 
 

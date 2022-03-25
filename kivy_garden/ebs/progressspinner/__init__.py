@@ -1,9 +1,9 @@
-'''
+"""
 ProgressSpinner
 ===============
 
 Android Lollipop style progress spinner.
-'''
+"""
 
 from kivy.lang import Builder
 from kivy.core.image import Image as CoreImage
@@ -15,100 +15,101 @@ from kivy.uix.widget import Widget
 
 Builder.load_string('''
 <ProgressSpinnerBase>:
-	_size: min(self.height, self.width)
-	_rsize: self._size / 2.
-	_stroke: max(0.1, self._rsize / 20. if self.stroke_width is None else self.stroke_width)
-	_radius: self._rsize - self._stroke * 2.
+    _size: min(self.height, self.width)
+    _rsize: self._size / 2.
+    _stroke: max(0.1, self._rsize / 20. if self.stroke_width is None else self.stroke_width)
+    _radius: self._rsize - self._stroke * 2.
 
 <ProgressSpinner>:
-	canvas:
-		Color:
-			rgba: self.color
-		Line:
-			circle:
-				(self.center_x, self.center_y, self._radius,
-				self._angle_center + self._angle_start,
-				self._angle_center + self._angle_end)
-			width: self._stroke
-			cap: 'none'
+    canvas:
+        Color:
+            rgba: self.color
+        Line:
+            circle:
+                (self.center_x, self.center_y, self._radius,
+                self._angle_center + self._angle_start,
+                self._angle_center + self._angle_end)
+            width: self._stroke
+            cap: 'none'
 
 <TextureProgressSpinner>:
-	canvas:
-		StencilPush
-		Color:
-			rgba: 1, 1, 1, 1
-		Line:
-			circle:
-				(self.center_x, self.center_y, self._radius,
-				self._angle_center + self._angle_start,
-				self._angle_center + self._angle_end)
-			width: self._stroke
-			cap: 'none'
-		StencilUse
+    canvas:
+        StencilPush
+        Color:
+            rgba: 1, 1, 1, 1
+        Line:
+            circle:
+                (self.center_x, self.center_y, self._radius,
+                self._angle_center + self._angle_start,
+                self._angle_center + self._angle_end)
+            width: self._stroke
+            cap: 'none'
+        StencilUse
 
-		Color:
-			rgba: self.color
-		Rectangle:
-			pos: self.center_x - self._rsize, self.center_y - self._rsize
-			size: self._size, self._size
-			texture: self.texture
+        Color:
+            rgba: self.color
+        Rectangle:
+            pos: self.center_x - self._rsize, self.center_y - self._rsize
+            size: self._size, self._size
+            texture: self.texture
 
-		StencilUnUse
-		Color:
-			rgba: 1, 1, 1, 1
-		Line:
-			circle:
-				(self.center_x, self.center_y, self._radius,
-				self._angle_center + self._angle_start,
-				self._angle_center + self._angle_end)
-			width: self._stroke
-			cap: 'none'
-		StencilPop
+        StencilUnUse
+        Color:
+            rgba: 1, 1, 1, 1
+        Line:
+            circle:
+                (self.center_x, self.center_y, self._radius,
+                self._angle_center + self._angle_start,
+                self._angle_center + self._angle_end)
+            width: self._stroke
+            cap: 'none'
+        StencilPop
 
 <RotatingTextureProgressSpinner>:
-	canvas:
-		PushMatrix
-		Rotate:
-			angle: -self._angle_center
-			origin: self.center
+    canvas:
+        PushMatrix
+        Rotate:
+            angle: -self._angle_center
+            origin: self.center
 
-		StencilPush
-		Color:
-			rgba: 1, 1, 1, 1
-		Line:
-			circle:
-				(self.center_x, self.center_y, self._radius,
-				self._angle_start, self._angle_end)
-			width: self._stroke
-			cap: 'none'
-		StencilUse
+        StencilPush
+        Color:
+            rgba: 1, 1, 1, 1
+        Line:
+            circle:
+                (self.center_x, self.center_y, self._radius,
+                self._angle_start, self._angle_end)
+            width: self._stroke
+            cap: 'none'
+        StencilUse
 
-		Color:
-			rgba: self.color
-		Rectangle:
-			pos: self.center_x - self._rsize, self.center_y - self._rsize
-			size: self._size, self._size
-			texture: self.texture
+        Color:
+            rgba: self.color
+        Rectangle:
+            pos: self.center_x - self._rsize, self.center_y - self._rsize
+            size: self._size, self._size
+            texture: self.texture
 
-		StencilUnUse
-		Color:
-			rgba: 1, 1, 1, 1
-		Line:
-			circle:
-				(self.center_x, self.center_y, self._radius,
-				self._angle_start, self._angle_end)
-			width: self._stroke
-			cap: 'none'
-		StencilPop
+        StencilUnUse
+        Color:
+            rgba: 1, 1, 1, 1
+        Line:
+            circle:
+                (self.center_x, self.center_y, self._radius,
+                self._angle_start, self._angle_end)
+            width: self._stroke
+            cap: 'none'
+        StencilPop
 
-		PopMatrix
+        PopMatrix
 
 ''')
 
 
 class ProgressSpinnerBase(Widget):
-    '''ProgressSpinnerBase - base class for progress spinner widgets
-    '''
+    """
+    ProgressSpinnerBase - base class for progress spinner widgets
+    """
 
     color = ListProperty([1, 1, 1, 1])
     '''Color to render the spinner.
@@ -166,9 +167,9 @@ class ProgressSpinnerBase(Widget):
             self.start_spinning()
 
     def start_spinning(self, *args):
-        '''Start spinning the progress spinner. Ignores all positional args
+        """Start spinning the progress spinner. Ignores all positional args
         for easy binding.
-        '''
+        """
         if not self._spinning:
             self._state = 'wait1'
             self._next = None
@@ -180,12 +181,12 @@ class ProgressSpinnerBase(Widget):
             self._spinning = True
 
     def stop_spinning(self, *args):
-        '''Stop spinning the progress spinner. Ignores all positional args
+        """Stop spinning the progress spinner. Ignores all positional args
         for easy binding.
 
         If you intend to keep the spinner around, you should stop it when
         not using it and restart it when needed again.
-        '''
+        """
         if self._spinning:
             if self._next:
                 if isinstance(self._next, Animation):
@@ -233,8 +234,8 @@ class ProgressSpinnerBase(Widget):
 
 
 class ProgressSpinner(ProgressSpinnerBase):
-    '''ProgressSpinner class. Android Lollipop style progress spinner.
-    '''
+    """ProgressSpinner class. Android Lollipop style progress spinner.
+    """
     pass
 
 
@@ -259,19 +260,19 @@ class TextureProgressSpinnerBase(ProgressSpinnerBase):
 
 
 class TextureProgressSpinner(TextureProgressSpinnerBase):
-    '''TextureProgressSpinner class.
+    """TextureProgressSpinner class.
 
     Same as ProgressSpinner, but with a texture/image instead of a solid color.
-    '''
+    """
     pass
 
 
 class RotatingTextureProgressSpinner(TextureProgressSpinnerBase):
-    '''RotatingTextureProgressSpinner class.
+    """RotatingTextureProgressSpinner class.
 
     Same as TextureProgressSpinner, but the texture/image rotates along with
     the spinner.
-    '''
+    """
     pass
 
 
@@ -294,67 +295,67 @@ if __name__ == '__main__':
             Clock.schedule_once(self.blittex, -1)
 
             return Builder.load_string(dedent('''\
-				<ProgressSpinnerBase>:
-					on_touch_down: self.stop_spinning() if self._spinning else self.start_spinning()
+                <ProgressSpinnerBase>:
+                    on_touch_down: self.stop_spinning() if self._spinning else self.start_spinning()
 
-				<TTextureProgressSpinner@TextureProgressSpinner>:
-					texture: app.texture
+                <TTextureProgressSpinner@TextureProgressSpinner>:
+                    texture: app.texture
 
-				<TRotatingTextureProgressSpinner@RotatingTextureProgressSpinner>:
-					texture: app.texture
+                <TRotatingTextureProgressSpinner@RotatingTextureProgressSpinner>:
+                    texture: app.texture
 
-				<ITextureProgressSpinner@TextureProgressSpinner>:
-					source: 'demoimage.jpg'
+                <ITextureProgressSpinner@TextureProgressSpinner>:
+                    source: 'demoimage.jpg'
 
-				<IRotatingTextureProgressSpinner@RotatingTextureProgressSpinner>:
-					source: 'demoimage.jpg'
+                <IRotatingTextureProgressSpinner@RotatingTextureProgressSpinner>:
+                    source: 'demoimage.jpg'
 
-				BoxLayout:
-					BoxLayout:
-						orientation: 'vertical'
+                BoxLayout:
+                    BoxLayout:
+                        orientation: 'vertical'
 
-						ProgressSpinner
+                        ProgressSpinner
 
-						TTextureProgressSpinner
+                        TTextureProgressSpinner
 
-						TRotatingTextureProgressSpinner
+                        TRotatingTextureProgressSpinner
 
-					BoxLayout:
-						orientation: 'vertical'
+                    BoxLayout:
+                        orientation: 'vertical'
 
-						BoxLayout:
-							ProgressSpinner:
-								color: 0.3, 0.3, 1, 1
-								stroke_width: 1
+                        BoxLayout:
+                            ProgressSpinner:
+                                color: 0.3, 0.3, 1, 1
+                                stroke_width: 1
 
-							ProgressSpinner:
-								speed: 0.5
-								color: 1, 0, 0, 1
+                            ProgressSpinner:
+                                speed: 0.5
+                                color: 1, 0, 0, 1
 
-							ProgressSpinner:
-								speed: 2
-								color: 0, 1, 0, 1
+                            ProgressSpinner:
+                                speed: 2
+                                color: 0, 1, 0, 1
 
-						BoxLayout:
-							TTextureProgressSpinner:
-								color: 1, 0, 0, 1
+                        BoxLayout:
+                            TTextureProgressSpinner:
+                                color: 1, 0, 0, 1
 
-							ITextureProgressSpinner:
-								stroke_width: 10
+                            ITextureProgressSpinner:
+                                stroke_width: 10
 
-							ITextureProgressSpinner:
-								stroke_length: 20
+                            ITextureProgressSpinner:
+                                stroke_length: 20
 
-						BoxLayout:
-							TRotatingTextureProgressSpinner:
-								color: 1, 0, 0, 1
+                        BoxLayout:
+                            TRotatingTextureProgressSpinner:
+                                color: 1, 0, 0, 1
 
-							IRotatingTextureProgressSpinner:
-								stroke_width: 10
+                            IRotatingTextureProgressSpinner:
+                                stroke_width: 10
 
-							IRotatingTextureProgressSpinner:
-								stroke_length: 20
-			'''))
+                            IRotatingTextureProgressSpinner:
+                                stroke_length: 20
+            '''))
 
 
     TestApp().run()
