@@ -11,7 +11,7 @@ with open(path.join(here, 'README.md'), encoding='utf-8') as f:
 URL = 'https://github.com/ebs-universe/kivy_garden.ebs.progressspinner'
 
 setup(
-    name='progressspinner-ebs',
+    name='kivy_garden.ebs.progressspinner',
     author='Kathryn Taylee',
     author_email='kived@github.com',
     maintainer='Chintalagiri Shashank',
